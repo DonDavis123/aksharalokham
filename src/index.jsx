@@ -7,7 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Aksharalokam">
+    {/* This is the corrected part. The 'basename' property has been removed. */}
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
