@@ -1,6 +1,5 @@
-import { useState, useRef } from "react";
-import { Upload, BookOpen, MessageCircle, User, History, LogOut, FileText, Send, Download, Home, Plus, Bell, Calendar, Users, Star, Coffee, Sparkles, Heart } from "lucide-react";
-import './index.css';
+import { useState, useRef, useEffect } from "react";
+import { Upload, BookOpen, MessageCircle, User, LogOut, FileText, Send, Plus, Menu, X, ChevronRight, ChevronLeft, MessageSquarePlus } from "lucide-react";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -15,12 +14,12 @@ export default function App() {
           return <Login setUser={setUser} setCurrentPage={setCurrentPage} />;
       }
     } else {
-      return <Dashboard user={user} setUser={setUser} currentPage={currentPage} setCurrentPage={setCurrentPage} />;
+      return <Dashboard user={user} setUser={setUser} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-blue-50">
       {renderPage()}
     </div>
   );
@@ -33,7 +32,7 @@ function Login({ setUser, setCurrentPage }) {
   function handleLogin(e) {
     e.preventDefault();
     if (email && password) {
-      setUser({ 
+      setUser({
         email,
         name: email.split('@')[0],
         type: email.includes('teacher') ? 'teacher' : 'student'
@@ -43,16 +42,16 @@ function Login({ setUser, setCurrentPage }) {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-      <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-pink-300 to-purple-300 rounded-full opacity-20 animate-bounce"></div>
-      <div className="absolute top-32 right-20 w-16 h-16 bg-gradient-to-br from-blue-300 to-indigo-300 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-20 left-32 w-12 h-12 bg-gradient-to-br from-yellow-300 to-orange-300 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+      <div className="absolute top-10 left-10 w-20 h-20 bg-gradient-to-br from-green-300 to-teal-300 rounded-full opacity-20 animate-bounce"></div>
+      <div className="absolute top-32 right-20 w-16 h-16 bg-gradient-to-br from-teal-300 to-blue-300 rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 left-32 w-12 h-12 bg-gradient-to-br from-blue-300 to-green-300 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
       
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div className="text-center">
-          <div className="mx-auto h-24 w-24 bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 rounded-3xl flex items-center justify-center mb-6 shadow-lg transform hover:scale-105 transition-all duration-300">
+          <div className="mx-auto h-24 w-24 bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 rounded-3xl flex items-center justify-center mb-6 shadow-lg transform hover:scale-105 transition-all duration-300">
             <BookOpen className="h-12 w-12 text-white" />
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">അക്ഷരലോകം</h1>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-3">അക്ഷരലോകം</h1>
           <h2 className="text-2xl text-gray-600 font-medium">Aksharalokam</h2>
           <p className="text-gray-500 mt-2 text-lg">Malayalam Learning Platform ✨</p>
         </div>
@@ -64,7 +63,7 @@ function Login({ setUser, setCurrentPage }) {
               <input
                 type="email"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
                 placeholder="നിങ്ങളുടെ ഇമെയിൽ / Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -75,7 +74,7 @@ function Login({ setUser, setCurrentPage }) {
               <input
                 type="password"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
                 placeholder="പാസ്‌വേഡ് / Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -83,7 +82,7 @@ function Login({ setUser, setCurrentPage }) {
             </div>
             <button
               onClick={handleLogin}
-              className="w-full bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 text-white py-3 px-4 rounded-xl hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500 transition duration-300 transform hover:scale-105 font-medium shadow-lg"
+              className="w-full bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 text-white py-3 px-4 rounded-xl hover:from-green-500 hover:via-teal-500 hover:to-blue-500 transition duration-300 transform hover:scale-105 font-medium shadow-lg"
             >
               പ്രവേശിക്കുക / Login ✨
             </button>
@@ -92,7 +91,7 @@ function Login({ setUser, setCurrentPage }) {
             അക്കൗണ്ട് ഇല്ലേ? / Don't have an account?{' '}
             <button 
               onClick={() => setCurrentPage('signup')}
-              className="text-purple-500 hover:text-purple-600 font-medium underline decoration-2 decoration-purple-200 hover:decoration-purple-400 transition-all duration-200"
+              className="text-green-500 hover:text-green-600 font-medium underline decoration-2 decoration-green-200 hover:decoration-green-400 transition-all duration-200"
             >
               രജിസ്റ്റർ ചെയ്യുക / Sign Up
             </button>
@@ -111,7 +110,7 @@ function Signup({ setUser, setCurrentPage }) {
   function handleSignup(e) {
     e.preventDefault();
     if (email && password) {
-      setUser({ 
+      setUser({
         email,
         name: email.split('@')[0],
         type: userType
@@ -122,14 +121,14 @@ function Signup({ setUser, setCurrentPage }) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       <div className="absolute top-16 right-16 w-32 h-32 bg-gradient-to-br from-green-200 to-blue-200 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-16 left-16 w-24 h-24 bg-gradient-to-br from-orange-200 to-pink-200 rounded-full opacity-20 animate-bounce"></div>
+      <div className="absolute bottom-16 left-16 w-24 h-24 bg-gradient-to-br from-teal-200 to-green-200 rounded-full opacity-20 animate-bounce"></div>
       
       <div className="max-w-md w-full space-y-8 relative z-10">
         <div className="text-center">
           <div className="mx-auto h-24 w-24 bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 rounded-3xl flex items-center justify-center mb-6 shadow-lg transform hover:scale-105 transition-all duration-300">
             <BookOpen className="h-12 w-12 text-white" />
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-3">അക്ഷരലോകം</h1>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-3">അക്ഷരലോകം</h1>
           <h2 className="text-2xl text-gray-600 font-medium">Registration 🌟</h2>
         </div>
 
@@ -140,7 +139,7 @@ function Signup({ setUser, setCurrentPage }) {
               <input
                 type="email"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
                 placeholder="നിങ്ങളുടെ ഇമെയിൽ / Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -151,7 +150,7 @@ function Signup({ setUser, setCurrentPage }) {
               <input
                 type="password"
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent bg-white/70 backdrop-blur-sm transition-all duration-200"
                 placeholder="പാസ്‌വേഡ് / Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -199,7 +198,7 @@ function Signup({ setUser, setCurrentPage }) {
             ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ? / Already have an account?{' '}
             <button 
               onClick={() => setCurrentPage('login')}
-              className="text-teal-500 hover:text-teal-600 font-medium underline decoration-2 decoration-teal-200 hover:decoration-teal-400 transition-all duration-200"
+              className="text-green-500 hover:text-green-600 font-medium underline decoration-2 decoration-green-200 hover:decoration-green-400 transition-all duration-200"
             >
               പ്രവേശിക്കുക / Login
             </button>
@@ -210,606 +209,413 @@ function Signup({ setUser, setCurrentPage }) {
   );
 }
 
-function Dashboard({ user, setUser, currentPage, setCurrentPage }) {
-  const [chatHistory] = useState([
+function Dashboard({ user, setUser }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('chat');
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  
+  const initialChatId = useRef(Date.now()).current;
+  const [chatSessions, setChatSessions] = useState([
     {
-      id: 1,
-      title: "മലയാള സാഹിത്യ ചരിത്രം",
-      date: "2025-01-15",
-      questions: 12,
-      document: "malayalam_literature.pdf",
-      lastMessage: "സാഹിത്യത്തിൻറെ പ്രാധാന്യം എന്താണ്?"
-    },
-    {
-      id: 2,
-      title: "കേരള ചരിത്രം",
-      date: "2025-01-14",
-      questions: 8,
-      document: "kerala_history.pdf",
-      lastMessage: "കേരളത്തിലെ പ്രധാന രാജവംശങ്ങൾ ഏവയാണ്?"
+      id: initialChatId,
+      title: "New Chat",
+      messages: [{
+        sender: "AI",
+        text: `നമസ്കാരം ${user.name}! 🙏 മലയാളത്തെക്കുറിച്ച് എന്തെങ്കിലും ചോപിക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ? / Hello! Do you have any questions about Malayalam?`,
+        timestamp: new Date().toLocaleTimeString()
+      }],
+      createdAt: new Date().toISOString()
     }
   ]);
+  const [currentChatId, setCurrentChatId] = useState(initialChatId);
+
+  const [studyMaterials, setStudyMaterials] = useState({
+    std7: {
+      malayalam: [{ id: 1, title: "മലയാള വ്യാകരണം - അധ്യായം 1", type: "PDF", uploadedBy: "രമേഷ് സാർ", date: "2025-01-20" }],
+      english: [{ id: 3, title: "Grammar Basics", type: "PDF", uploadedBy: "John Sir", date: "2025-01-18" }],
+      mathematics: [{ id: 4, title: "Algebra Introduction", type: "PDF", uploadedBy: "രവി സാർ", date: "2025-01-17" }]
+    },
+    std8: {
+      malayalam: [{ id: 5, title: "നാടോടിക്കഥകൾ", type: "PDF", uploadedBy: "ലീല ടീച്ചർ", date: "2025-01-16" }],
+      english: [{ id: 6, title: "Literature Basics", type: "PDF", uploadedBy: "Mary Teacher", date: "2025-01-15" }]
+    },
+    std9: { malayalam: [{ id: 7, title: "ഗദ്യ സാഹിത്യം", type: "PDF", uploadedBy: "കമല സാർ", date: "2025-01-14" }] },
+    std10: { malayalam: [{ id: 8, title: "Board Exam Preparation", type: "PDF", uploadedBy: "രാധിക ടീച്ചർ", date: "2025-01-13" }] }
+  });
+
+  const classes = ['std7', 'std8', 'std9', 'std10'];
+  const subjects = {
+    std7: ['malayalam', 'english', 'mathematics', 'science', 'social'],
+    std8: ['malayalam', 'english', 'mathematics', 'science', 'social'],
+    std9: ['malayalam', 'english', 'mathematics', 'physics', 'chemistry', 'biology', 'social'],
+    std10: ['malayalam', 'english', 'mathematics', 'physics', 'chemistry', 'biology', 'social']
+  };
+  const subjectLabels = {
+    malayalam: 'മലയാളം', english: 'English', mathematics: 'ഗണിതം', science: 'സയൻസ്', physics: 'ഫിസിക്സ്', chemistry: 'കെമിസ്ട്രി', biology: 'ബയോളജി', social: 'സാമൂഹിക ശാസ്ത്രം'
+  };
+
+  function createNewChat() {
+    const mostRecentChat = chatSessions[0];
+    if (mostRecentChat && mostRecentChat.title === "New Chat" && mostRecentChat.messages.length === 1) {
+      setCurrentChatId(mostRecentChat.id);
+      if (window.innerWidth < 1024) setSidebarOpen(false);
+      return;
+    }
+    const newChat = {
+      id: Date.now(),
+      title: "New Chat",
+      messages: [{
+        sender: "AI", text: `നമസ്കാരം ${user.name}! 🙏 എന്തെങ്കിലും ചോദിക്കാനുണ്ടോ? / Hello! Any questions?`, timestamp: new Date().toLocaleTimeString()
+      }],
+      createdAt: new Date().toISOString()
+    };
+    setChatSessions(prev => [newChat, ...prev]);
+    setCurrentChatId(newChat.id);
+    if (window.innerWidth < 1024) setSidebarOpen(false);
+  }
 
   function handleLogout() {
     setUser(null);
-    setCurrentPage('login');
   }
 
-  const dashboardPage = currentPage === 'login' || currentPage === 'signup' ? 'home' : currentPage;
-
-  const renderDashboardContent = () => {
-    switch (dashboardPage) {
-      case 'account':
-        return <Account user={user} />;
-      case 'chat':
-        return <Chat user={user} />;
-      case 'study':
-        return user.type === 'student' ? <StudyMaterials user={user} /> : <TeacherNotes user={user} />;
-      default:
-        return <HomePage user={user} chatHistory={chatHistory} setCurrentPage={setCurrentPage} />;
+  function handleSectionChange(section) {
+    setActiveSection(section);
+    if (section === 'chat') {
+      setSelectedClass(null);
+      setSelectedSubject(null);
     }
-  };
+  }
+
+  const currentChat = chatSessions.find(chat => chat.id === currentChatId);
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
-      <nav className="w-72 bg-white/80 backdrop-blur-sm shadow-xl border-r border-white/20">
-        <div className="p-6 border-b border-white/30">
-          <div className="flex items-center space-x-4">
-            <div className={`h-12 w-12 ${user.type === 'teacher' ? 'bg-gradient-to-r from-green-400 to-teal-400' : 'bg-gradient-to-r from-purple-400 to-pink-400'} rounded-2xl flex items-center justify-center shadow-lg`}>
-              <BookOpen className="h-7 w-7 text-white" />
-            </div>
-            <div>
-              <h2 className="font-bold text-gray-900 text-lg">അക്ഷരലോകം</h2>
-              <p className="text-sm text-gray-500 flex items-center space-x-1">
-                <span>{user.type === 'teacher' ? '👩‍🏫 അധ്യാപകൻ' : '📚 വിദ്യാർത്ഥി'}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-4 space-y-3">
-          <NavLink 
-            active={dashboardPage === 'home'} 
-            onClick={() => setCurrentPage('home')} 
-            icon={Home} 
-            label="ഹോം / Home" 
-            emoji="🏠"
-          />
-          <NavLink 
-            active={dashboardPage === 'chat'} 
-            onClick={() => setCurrentPage('chat')} 
-            icon={MessageCircle} 
-            label="ചാറ്റ് / Chat" 
-            emoji="💬"
-          />
-          <NavLink 
-            active={dashboardPage === 'study'} 
-            onClick={() => setCurrentPage('study')} 
-            icon={BookOpen} 
-            label={user.type === 'teacher' ? 'നോട്ട്സ് / Notes' : 'പഠനം / Study'} 
-            emoji={user.type === 'teacher' ? '📝' : '📖'}
-          />
-          <NavLink 
-            active={dashboardPage === 'account'} 
-            onClick={() => setCurrentPage('account')} 
-            icon={User} 
-            label="അക്കൗണ്ട് / Account" 
-            emoji="👤"
-          />
-          
-          <div className="pt-4 border-t border-gray-200">
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center space-x-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl transition duration-200 font-medium"
-            >
-              <LogOut className="h-5 w-5" />
-              <span>ലോഗ് ഔട്ട് / Logout</span>
-              <span className="ml-auto">👋</span>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      <main className="flex-1 overflow-auto">
-        {renderDashboardContent()}
-      </main>
-    </div>
-  );
-}
-
-function NavLink({ active, onClick, icon: Icon, label, emoji }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition duration-200 font-medium ${
-        active 
-          ? 'bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 shadow-sm' 
-          : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600'
-      }`}
-    >
-      <Icon className="h-5 w-5" />
-      <span className="flex-1 text-left">{label}</span>
-      <span className="text-lg">{emoji}</span>
-    </button>
-  );
-}
-
-function HomePage({ user, chatHistory, setCurrentPage }) {
-  return (
-    <div className="p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"></div>
-            <div className="relative z-10">
-              <h1 className="text-4xl font-bold mb-4">
-                സ്വാഗതം, {user.name}! 🎉
-              </h1>
-              <p className="text-xl opacity-90">
-                {user.type === 'teacher' 
-                  ? 'നിങ്ങളുടെ വിദ്യാർത്ഥികളെ പഠിപ്പിക്കാൻ തയ്യാറാണോ? / Ready to teach your students?'
-                  : 'ഇന്ന് എന്താണ് പഠിക്കാൻ ആഗ്രഹിക്കുന്നത്? / What would you like to learn today?'
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <QuickActionCard
-            icon={MessageCircle}
-            title="പുതിയ ചാറ്റ് / New Chat"
-            description="പുതിയ PDF അപ്‌ലോഡ് ചെയ്യുക"
-            emoji="💬"
-            color="from-blue-400 to-indigo-400"
-            onClick={() => setCurrentPage('chat')}
-          />
-          <QuickActionCard
-            icon={BookOpen}
-            title={user.type === 'teacher' ? 'നോട്ട്സ് / Notes' : 'പഠനം / Study'}
-            description={user.type === 'teacher' ? 'വിദ്യാർത്ഥികൾക്കായി നോട്ട്സ് ചേർക്കുക' : 'അധ്യാപകൻ്റെ നോട്ട്സ് കാണുക'}
-            emoji={user.type === 'teacher' ? '📝' : '📖'}
-            color="from-green-400 to-teal-400"
-            onClick={() => setCurrentPage('study')}
-          />
-          <QuickActionCard
-            icon={History}
-            title="ചരിത്രം / History"
-            description="മുൻ ചാറ്റുകൾ കാണുക"
-            emoji="📚"
-            color="from-purple-400 to-pink-400"
-            onClick={() => setCurrentPage('chat')}
-          />
-        </div>
-
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-            <History className="h-6 w-6 text-purple-500" />
-            <span>സമീപകാല ചാറ്റുകൾ / Recent Chats</span>
-            <Sparkles className="h-5 w-5 text-yellow-400" />
-          </h2>
-          
-          {chatHistory.length > 0 ? (
-            <div className="space-y-4">
-              {chatHistory.map(chat => (
-                <div key={chat.id} className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 hover:shadow-md transition-all duration-200 cursor-pointer border border-purple-100" 
-                     onClick={() => setCurrentPage('chat')}>
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 mb-2 flex items-center space-x-2">
-                        <FileText className="h-5 w-5 text-purple-500" />
-                        <span>{chat.title}</span>
-                      </h3>
-                      <p className="text-purple-600 mb-2 font-medium">📄 {chat.document}</p>
-                      <p className="text-gray-600 text-sm mb-2">"{chat.lastMessage}"</p>
-                      <p className="text-gray-500 text-sm flex items-center space-x-4">
-                        <span>💭 {chat.questions} ചോദ്യങ്ങൾ</span>
-                        <span>📅 {chat.date}</span>
-                      </p>
-                    </div>
-                    <button className="text-purple-500 hover:text-purple-600 p-2 hover:bg-purple-100 rounded-lg transition-all duration-200">
-                      <MessageCircle className="h-5 w-5" />
-                    </button>
-                  </div>
+    <div className="relative h-screen w-full flex bg-gray-50 overflow-hidden">
+      <div className={`absolute lg:relative z-20 h-full flex flex-col transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 w-80 bg-white shadow-lg border-r border-gray-200`}>
+        <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-blue-50 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+                <div className={`h-10 w-10 ${user.type === 'teacher' ? 'bg-gradient-to-r from-green-400 to-teal-400' : 'bg-gradient-to-r from-green-400 via-teal-400 to-blue-400'} rounded-lg flex items-center justify-center`}>
+                    <BookOpen className="h-5 w-5 text-white" />
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-20 h-20 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="h-10 w-10 text-purple-400" />
-              </div>
-              <p className="text-gray-500 text-lg">ചാറ്റ് ചരിത്രം കാണാൻ ഇല്ല / No chat history available</p>
-              <p className="text-gray-400">പുതിയ ചാറ്റ് ആരംഭിക്കാൻ മുകളിൽ ക്ലിക്ക് ചെയ്യുക 💬</p>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function QuickActionCard({ icon: Icon, title, description, emoji, color, onClick }) {
-  return (
-    <div 
-      className={`bg-gradient-to-r ${color} p-6 rounded-2xl text-white cursor-pointer hover:shadow-lg transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
-      onClick={onClick}
-    >
-      <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-4">
-          <Icon className="h-8 w-8" />
-          <span className="text-3xl">{emoji}</span>
-        </div>
-        <h3 className="font-bold text-lg mb-2">{title}</h3>
-        <p className="text-white/90 text-sm">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-function Chat({ user }) {
-  const [messages, setMessages] = useState([
-    {
-      sender: "AI",
-      text: `നമസ്കാരം ${user.name}! 🙏 നിങ്ങളുടെ മലയാളം PDF അപ്‌ലോഡ് ചെയ്ത് എന്നോട് ചോദ്യങ്ങൾ ചോദിക്കാവുന്നതാണ്. / Hello! You can upload your Malayalam document and ask me questions about it.`,
-      timestamp: new Date().toLocaleTimeString()
-    }
-  ]);
-  const [input, setInput] = useState("");
-  const [uploadedFile, setUploadedFile] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const fileInputRef = useRef(null);
-
-  function handleFileUpload(e) {
-    const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
-      setUploadedFile(file);
-      setIsProcessing(true);
-      
-      const uploadMessage = {
-        sender: "System",
-        text: `📄 "${file.name}" അപ്‌ലോഡ് ചെയ്തു. പ്രോസസ് ചെയ്യുന്നു... / Uploaded "${file.name}". Processing...`,
-        timestamp: new Date().toLocaleTimeString(),
-        type: "system"
-      };
-      
-      setMessages(prev => [...prev, uploadMessage]);
-      
-      setTimeout(() => {
-        setIsProcessing(false);
-        const readyMessage = {
-          sender: "AI",
-          text: `✅ "${file.name}" തയ്യാർ! ഇപ്പോൾ നിങ്ങൾക്ക് ഈ PDF-ക്കുറിച്ച് ചോദ്യങ്ങൾ ചോദിക്കാം. 🤖 / Document ready! You can now ask questions about this document.`,
-          timestamp: new Date().toLocaleTimeString()
-        };
-        setMessages(prev => [...prev, readyMessage]);
-      }, 2000);
-    }
-  }
-
-  function sendMessage() {
-    if (!input.trim()) return;
-    
-    const newMessages = [
-      ...messages,
-      { 
-        sender: "You", 
-        text: input, 
-        timestamp: new Date().toLocaleTimeString() 
-      },
-      { 
-        sender: "AI", 
-        text: `🤔 മനസ്സിലായി. ഞാൻ നിങ്ങളുടെ പ്രമാണം പരിശോധിച്ച് ഉത്തരം നൽകാം... ${uploadedFile ? `"${uploadedFile.name}" ൽ നിന്ന് വിവരങ്ങൾ തിരയുന്നു.` : ''} / I understand. Let me check your document and provide an answer...`,
-        timestamp: new Date().toLocaleTimeString() 
-      }
-    ];
-    
-    setMessages(newMessages);
-    setInput("");
-  }
-
-  function handleKeyPress(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  }
-
-  return (
-    <div className="h-full flex flex-col">
-      <div className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-white/20 p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="h-12 w-12 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-2xl flex items-center justify-center">
-              <MessageCircle className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">AI ചാറ്റ് / AI Chat</h1>
-              <p className="text-gray-500">
-                {uploadedFile ? `📄 ${uploadedFile.name}` : '📤 പ്രമാണം അപ്‌ലോഡ് ചെയ്യുക / Upload Document'}
-              </p>
-            </div>
-          </div>
-          
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-xl hover:from-purple-600 hover:to-pink-600 transition duration-200 flex items-center space-x-2 shadow-lg"
-          >
-            <Upload className="h-5 w-5" />
-            <span>അപ്‌ലോഡ്</span>
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf"
-            onChange={handleFileUpload}
-            className="hidden"
-          />
-        </div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex ${msg.sender === 'You' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${
-                msg.sender === 'You'
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
-                  : msg.type === 'system'
-                  ? 'bg-blue-100 text-blue-800 border border-blue-200'
-                  : 'bg-white text-gray-900 border border-gray-200'
-              }`}
-            >
-              <p className="font-medium text-sm mb-1">{msg.sender}</p>
-              <p>{msg.text}</p>
-              <p className={`text-xs mt-2 ${
-                msg.sender === 'You' ? 'text-purple-100' : 'text-gray-500'
-              }`}>
-                {msg.timestamp}
-              </p>
-            </div>
-          </div>
-        ))}
-        
-        {isProcessing && (
-          <div className="flex justify-center">
-            <div className="bg-gray-100 px-4 py-2 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-2 border-purple-500 border-t-transparent"></div>
-                <span className="text-gray-600">പ്രോസസ് ചെയ്യുന്നു...</span>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="bg-white/80 backdrop-blur-sm p-6 border-t border-white/20">
-        <div className="flex space-x-4">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="നിങ്ങളുടെ ചോദ്യം ഇവിടെ ടൈപ്പ് ചെയ്യുക... / Type your question here..."
-            className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-white/70 backdrop-blur-sm resize-none"
-            rows="2"
-          />
-          <button
-            onClick={sendMessage}
-            disabled={!input.trim()}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:from-purple-600 hover:to-pink-600 transition duration-200 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-          >
-            <Send className="h-5 w-5" />
-            <span>അയക്കുക</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Account({ user }) {
-  return (
-    <div className="p-8">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">അക്കൗണ്ട് വിവരങ്ങൾ / Account Details</h1>
-        
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <div className={`h-20 w-20 ${user.type === 'teacher' ? 'bg-gradient-to-r from-green-400 to-teal-400' : 'bg-gradient-to-r from-purple-400 to-pink-400'} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                <User className="h-10 w-10 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">{user.name}</h2>
-              <p className="text-gray-500">
-                {user.type === 'teacher' ? '👩‍🏫 അധ്യാപകൻ / Teacher' : '📚 വിദ്യാർത്ഥി / Student'}
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
-                <label className="block text-sm font-medium text-purple-600 mb-2">Email</label>
-                <p className="text-lg text-gray-900">{user.email}</p>
-              </div>
-              
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
-                <label className="block text-sm font-medium text-blue-600 mb-2">User Type</label>
-                <p className="text-lg text-gray-900">
-                  {user.type === 'teacher' ? 'അധ്യാപകൻ / Teacher' : 'വിദ്യാർത്ഥി / Student'}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StudyMaterials({ user }) {
-  const studyMaterials = [
-    {
-      id: 1,
-      title: "മലയാള വ്യാകരണം",
-      description: "അടിസ്ഥാന വ്യാകരണ നിയമങ്ങൾ",
-      type: "notes",
-      date: "2025-01-20",
-      teacher: "രമേഷ് സാർ"
-    },
-    {
-      id: 2,
-      title: "കവിതാ പഠനം",
-      description: "പ്രസിദ്ധ കവികളുടെ കവിതകൾ",
-      type: "assignment",
-      date: "2025-01-19",
-      teacher: "സുമ ടീച്ചർ"
-    }
-  ];
-
-  return (
-    <div className="p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 flex items-center space-x-2">
-          <BookOpen className="h-8 w-8 text-purple-500" />
-          <span>പഠന സാമഗ്രികൾ / Study Materials</span>
-          <Star className="h-6 w-6 text-yellow-400" />
-        </h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {studyMaterials.map(material => (
-            <div key={material.id} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-              <div className="flex items-start justify-between mb-4">
-                <div className={`h-12 w-12 ${material.type === 'notes' ? 'bg-gradient-to-r from-green-400 to-teal-400' : 'bg-gradient-to-r from-orange-400 to-red-400'} rounded-xl flex items-center justify-center`}>
-                  {material.type === 'notes' ? <FileText className="h-6 w-6 text-white" /> : <Calendar className="h-6 w-6 text-white" />}
-                </div>
-                <span className="text-2xl">{material.type === 'notes' ? '📝' : '📋'}</span>
-              </div>
-              
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{material.title}</h3>
-              <p className="text-gray-600 mb-4">{material.description}</p>
-              
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>👩‍🏫 {material.teacher}</span>
-                <span>📅 {material.date}</span>
-              </div>
-              
-              <button className="w-full mt-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg hover:from-purple-600 hover:to-pink-600 transition duration-200">
-                തുറക്കുക / Open
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TeacherNotes({ user }) {
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "മലയാള വ്യാകരണം - അടിസ്ഥാനങ്ങൾ",
-      content: "വിദ്യാർത്ഥികൾക്കായുള്ള അടിസ്ഥാന വ്യാകരണ നിയമങ്ങൾ",
-      date: "2025-01-20"
-    }
-  ]);
-  const [newNote, setNewNote] = useState({ title: "", content: "" });
-  const [showForm, setShowForm] = useState(false);
-
-  function addNote() {
-    if (newNote.title && newNote.content) {
-      setNotes([...notes, {
-        id: Date.now(),
-        ...newNote,
-        date: new Date().toISOString().split('T')[0]
-      }]);
-      setNewNote({ title: "", content: "" });
-      setShowForm(false);
-    }
-  }
-
-  return (
-    <div className="p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center space-x-2">
-            <FileText className="h-8 w-8 text-green-500" />
-            <span>വിദ്യാർത്ഥികൾക്കായുള്ള നോട്ട്സ് / Notes for Students</span>
-            <Heart className="h-6 w-6 text-red-400" />
-          </h1>
-          
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-teal-600 transition duration-200 flex items-center space-x-2 shadow-lg"
-          >
-            <Plus className="h-5 w-5" />
-            <span>പുതിയ നോട്ട് / New Note</span>
-          </button>
-        </div>
-
-        {showForm && (
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">പുതിയ നോട്ട് ചേർക്കുക / Add New Note</h2>
-            <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="നോട്ടിന്റെ തലക്കെട്ട് / Note Title"
-                value={newNote.title}
-                onChange={(e) => setNewNote({...newNote, title: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
-              />
-              <textarea
-                placeholder="നോട്ടിന്റെ ഉള്ളടക്കം / Note Content"
-                value={newNote.content}
-                onChange={(e) => setNewNote({...newNote, content: e.target.value})}
-                rows="4"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent resize-none"
-              />
-              <div className="flex space-x-4">
-                <button
-                  onClick={addNote}
-                  className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-2 rounded-lg hover:from-green-600 hover:to-teal-600 transition duration-200"
-                >
-                  സേവ് ചെയ്യുക / Save
-                </button>
-                <button
-                  onClick={() => setShowForm(false)}
-                  className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition duration-200"
-                >
-                  റദ്ദാക്കുക / Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="space-y-6">
-          {notes.map(note => (
-            <div key={note.id} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20">
-              <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center space-x-2">
-                    <span>{note.title}</span>
-                    <span className="text-2xl">📚</span>
-                  </h3>
-                  <p className="text-gray-600">{note.content}</p>
+                    <h2 className="font-bold text-lg text-gray-800">അക്ഷരലോകം</h2>
+                    <p className="text-sm text-gray-600">Aksharalokam</p>
+                </div>
+            </div>
+        </div>
+
+        {/* New Chat Button - RE-ADDED */}
+        <div className="p-4 border-b border-gray-200">
+          <button
+            onClick={createNewChat}
+            className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-2.5 px-4 rounded-lg hover:from-green-700 hover:to-blue-700 transition duration-200 flex items-center justify-center space-x-2 font-medium"
+          >
+            <Plus className="h-4 w-4" />
+            <span>പുതിയ ചാറ്റ് / New Chat</span>
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4">
+            <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
+                <button onClick={() => handleSectionChange('chat')} className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${activeSection === 'chat' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-600 hover:text-gray-800'}`}>💬 Chat</button>
+                <button onClick={() => handleSectionChange('study')} className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${activeSection === 'study' ? 'bg-white text-green-600 shadow-sm' : 'text-gray-600 hover:text-gray-800'}`}>📚 Study</button>
+            </div>
+
+            {activeSection === 'chat' && (
+              <div>
+                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Chat History</h3>
+                <div className="space-y-2">
+                  {chatSessions.map(chat => (
+                    <button key={chat.id} onClick={() => { setCurrentChatId(chat.id); if(window.innerWidth < 1024) { setSidebarOpen(false); } }} className={`w-full text-left p-3 rounded-lg transition-colors ${currentChatId === chat.id ? 'bg-green-50 border border-green-200 text-green-800' : 'text-gray-700 hover:bg-gray-50 border border-transparent'}`}>
+                      <div className="font-medium text-sm truncate">{chat.title}</div>
+                      <div className="text-xs text-gray-500 mt-1">{new Date(chat.createdAt).toLocaleDateString()}</div>
+                    </button>
+                  ))}
                 </div>
               </div>
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <span>📅 {note.date}</span>
-                <button className="text-green-500 hover:text-green-600 flex items-center space-x-1">
-                  <Users className="h-4 w-4" />
-                  <span>വിദ്യാർത്ഥികൾക്ക് പങ്കിടുക / Share with Students</span>
+            )}
+            
+            {activeSection === 'study' && (
+                 <div>
+                 {!selectedClass ? (
+                   <div>
+                     <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Select Class</h3>
+                     <div className="grid grid-cols-2 gap-3">
+                       {classes.map(cls => (
+                         <button key={cls} onClick={() => setSelectedClass(cls)} className="p-4 bg-gradient-to-br from-blue-50 to-green-50 border border-blue-200 rounded-lg hover:from-blue-100 hover:to-green-100 transition-all duration-200 text-center">
+                           <div className="text-2xl mb-2">🎓</div>
+                           <div className="font-medium text-gray-700">{cls.replace('std', 'Std ')}</div>
+                         </button>
+                       ))}
+                     </div>
+                   </div>
+                 ) : !selectedSubject ? (
+                   <div>
+                     <div className="flex items-center space-x-2 mb-4">
+                       <button onClick={() => setSelectedClass(null)} className="text-gray-500 hover:text-gray-700"><ChevronLeft className="h-4 w-4" /></button>
+                       <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{selectedClass.replace('std', 'Std ')} - Select Subject</h3>
+                     </div>
+                     <div className="space-y-2">
+                       {subjects[selectedClass]?.map(subject => (
+                         <button key={subject} onClick={() => setSelectedSubject(subject)} className="w-full p-3 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg hover:from-green-100 hover:to-blue-100 transition-all duration-200 text-left flex items-center justify-between">
+                           <span className="font-medium text-gray-700">{subjectLabels[subject]}</span>
+                           <ChevronRight className="h-4 w-4 text-gray-400" />
+                         </button>
+                       ))}
+                     </div>
+                   </div>
+                 ) : (
+                   <div>
+                     <div className="flex items-center space-x-2 mb-4">
+                       <button onClick={() => setSelectedSubject(null)} className="text-gray-500 hover:text-gray-700"><ChevronLeft className="h-4 w-4" /></button>
+                       <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{selectedClass.replace('std', 'Std ')} - {subjectLabels[selectedSubject]}</h3>
+                     </div>
+                     <div className="space-y-2">
+                       {studyMaterials[selectedClass]?.[selectedSubject]?.map(material => (
+                         <div key={material.id} className="p-3 rounded-lg bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200">
+                           <div className="font-medium text-sm text-gray-800 mb-1">{material.title}</div>
+                           <div className="text-xs text-gray-500">📄 {material.type} • {material.uploadedBy}</div>
+                           <div className="text-xs text-gray-400 mt-1">{material.date}</div>
+                         </div>
+                       )) || (
+                         <div className="text-center py-8 text-gray-500">
+                           <BookOpen className="h-12 w-12 mx-auto mb-3 text-gray-300" />
+                           <p>No materials available yet</p>
+                         </div>
+                       )}
+                       {user.type === 'teacher' && <UploadButton user={user} setStudyMaterials={setStudyMaterials} selectedClass={selectedClass} selectedSubject={selectedSubject} />}
+                     </div>
+                   </div>
+                 )}
+               </div>
+            )}
+        </div>
+      </div>
+
+      <div className="flex-1 flex flex-col h-screen">
+        <div className="flex items-center justify-between gap-4 p-4 lg:p-6 border-b border-gray-200 bg-white">
+            <div className="flex items-center gap-4">
+                <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-600 hover:text-gray-800 transition-colors">
+                    <Menu className="h-6 w-6" />
                 </button>
-              </div>
+                <h1 className="text-xl font-semibold text-gray-800 truncate">
+                  {(currentChat && currentChat.title !== 'New Chat') ? currentChat.title : 'Aksharalokam AI'}
+                </h1>
             </div>
-          ))}
+            <div className="relative">
+                <button onClick={() => setProfileOpen(!profileOpen)} className="h-9 w-9 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center">
+                    <User className="h-5 w-5 text-white" />
+                </button>
+                {profileOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-10 border border-gray-100">
+                        <div className="p-2 border-b">
+                            <p className="text-sm font-medium text-gray-800">{user.name}</p>
+                            <p className="text-xs text-gray-500">{user.type === 'teacher' ? 'Teacher' : 'Student'}</p>
+                        </div>
+                        <div className="p-1">
+                            <button onClick={() => alert('Feedback form not implemented yet.')} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Feedback</button>
+                            <button onClick={handleLogout} className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md">Logout</button>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+
+        <div className="flex-1 overflow-y-hidden">
+          {currentChat ? <ChatInterface key={currentChat.id} chat={currentChat} setChatSessions={setChatSessions} user={user} /> : <div>Select a chat</div> }
         </div>
       </div>
     </div>
   );
 }
+
+function UploadButton({ user, setStudyMaterials, selectedClass, selectedSubject }) {
+    const fileInputRef = useRef(null);
+  
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (file && selectedClass && selectedSubject) {
+        const newMaterial = {
+          id: Date.now(),
+          title: file.name.replace(/\.[^/.]+$/, ""),
+          type: file.type.includes('pdf') ? 'PDF' : 'Document',
+          uploadedBy: user.name,
+          date: new Date().toISOString().split('T')[0]
+        };
+        
+        setStudyMaterials(prev => {
+            const updatedMaterials = { ...prev };
+            if (!updatedMaterials[selectedClass]) updatedMaterials[selectedClass] = {};
+            if (!updatedMaterials[selectedClass][selectedSubject]) updatedMaterials[selectedClass][selectedSubject] = [];
+            updatedMaterials[selectedClass][selectedSubject].unshift(newMaterial);
+            return updatedMaterials;
+        });
+      }
+    }
+  
+    return (
+      <div className="mt-4">
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-200 flex items-center justify-center space-x-2"
+        >
+          <Upload className="h-4 w-4" />
+          <span>Upload Material</span>
+        </button>
+        <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" onChange={handleFileUpload} className="hidden"/>
+      </div>
+    );
+  }
+  
+  function ChatInterface({ chat, setChatSessions, user }) {
+    const [input, setInput] = useState("");
+    const [isTyping, setIsTyping] = useState(false);
+    const [uploadedFiles, setUploadedFiles] = useState([]);
+    const fileInputRef = useRef(null);
+    const messagesEndRef = useRef(null);
+  
+    useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [chat.messages, isTyping]);
+  
+    function handleFileUpload(e) {
+      const newFiles = Array.from(e.target.files).map(file => ({ name: file.name, size: file.size, type: file.type }));
+      setUploadedFiles(prev => [...prev, ...newFiles]);
+    }
+  
+    function removeFile(index) {
+      setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+    }
+  
+    function sendMessage() {
+      if (!input.trim() && uploadedFiles.length === 0) return;
+  
+      let messageText = input;
+      if (uploadedFiles.length > 0) {
+        const fileNames = uploadedFiles.map(f => f.name).join(', ');
+        messageText += `\n\n📎 Uploaded files: ${fileNames}`;
+      }
+  
+      const userMessage = { sender: "You", text: messageText, timestamp: new Date().toLocaleTimeString() };
+  
+      setChatSessions(prev => prev.map(c => {
+        if (c.id === chat.id) {
+          const isNewChat = c.title === "New Chat";
+          return { ...c, messages: [...c.messages, userMessage], title: isNewChat ? (input.slice(0, 30) || "New Conversation") : c.title };
+        }
+        return c;
+      }));
+  
+      setInput("");
+      setUploadedFiles([]);
+      setIsTyping(true);
+  
+      setTimeout(() => {
+        let aiResponse = `നിങ്ങളുടെ ചോദ്യം "${input}" മനസ്സിലായി. ഞാൻ ഈ വിഷയത്തെക്കുറിച്ച് കൂടുതൽ വിവരങ്ങൾ നൽകാൻ ശ്രമിക്കുന്നു... / I understand your question about "${input}". I am trying to provide more information on this topic...`;
+        if (uploadedFiles.length > 0) {
+          aiResponse += `\n\nനിങ്ങൾ അപ്‌ലോഡ് ചെയ്ത ഫയലുകൾ ഞാൻ വിശകലനം ചെയ്യുന്നുണ്ട്... / I'm analyzing the files you uploaded...`;
+        }
+        const aiMessage = { sender: "AI", text: aiResponse, timestamp: new Date().toLocaleTimeString() };
+        setChatSessions(prev => prev.map(c => c.id === chat.id ? { ...c, messages: [...c.messages, aiMessage] } : c));
+        setIsTyping(false);
+      }, 1500);
+    }
+  
+    function handleKeyPress(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+  
+    return (
+      <div className="flex flex-col h-full bg-gray-50">
+        {/* Main content area: either welcome screen or messages */}
+        {chat.messages.length <= 1 ? (
+            <div className="flex-1 flex flex-col justify-center items-center text-center p-4">
+                <div className="w-24 h-24 bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <BookOpen className="h-12 w-12 text-white" />
+                </div>
+                <h1 className="text-4xl font-bold text-gray-700">Aksharalokam AI</h1>
+                <p className="text-gray-500 mt-2">How can I help you today?</p>
+            </div>
+        ) : (
+            <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
+                {chat.messages.map((msg, i) => (
+                    <div key={i} className={`flex ${msg.sender === 'You' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-xl px-5 py-3 rounded-2xl shadow-sm ${msg.sender === 'You' ? 'bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 text-white' : 'bg-white text-gray-900 border border-gray-200'}`}>
+                        <div className="flex items-center space-x-2 mb-2">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${msg.sender === 'You' ? 'bg-white/20 text-white' : 'bg-green-100 text-green-600'}`}>
+                            {msg.sender === 'You' ? user.name.charAt(0).toUpperCase() : 'AI'}
+                        </div>
+                        <span className={`text-sm font-medium ${msg.sender === 'You' ? 'text-green-100' : 'text-gray-600'}`}>{msg.sender === 'You' ? 'You' : 'അക്ഷരലോകം AI'}</span>
+                        </div>
+                        <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+                        <p className={`text-xs mt-2 ${msg.sender === 'You' ? 'text-green-100' : 'text-gray-500'}`}>{msg.timestamp}</p>
+                    </div>
+                    </div>
+                ))}
+                {isTyping && (
+                    <div className="flex justify-start">
+                    <div className="bg-white border border-gray-200 px-6 py-4 rounded-2xl shadow-sm">
+                        <div className="flex items-center space-x-2">
+                        <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">AI</div>
+                        <span className="text-sm font-medium text-gray-600">അക്ഷരലോകം AI</span>
+                        </div>
+                        <div className="flex space-x-1 mt-2">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        </div>
+                    </div>
+                    </div>
+                )}
+                <div ref={messagesEndRef} />
+            </div>
+        )}
+  
+        {/* Input Area (this is now always visible) */}
+        <div className="bg-white border-t border-gray-200 p-4 lg:p-6">
+          <div className="max-w-4xl mx-auto">
+            {uploadedFiles.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                {uploadedFiles.map((file, index) => (
+                  <div key={index} className="flex items-center bg-green-50 border border-green-200 rounded-full px-3 py-1">
+                    <FileText className="h-4 w-4 text-green-600 mr-2" />
+                    <span className="text-sm text-green-700">{file.name}</span>
+                    <button onClick={() => removeFile(index)} className="ml-2 text-green-600 hover:text-green-800 w-4 h-4 flex items-center justify-center">×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            <div className="relative">
+              <div className="flex items-end bg-white border border-gray-300 rounded-3xl shadow-sm focus-within:border-green-400 focus-within:shadow-md transition-all duration-200">
+                <button onClick={() => fileInputRef.current?.click()} className="p-3 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition-colors duration-200 ml-2" title="Attach files">
+                  <FileText className="h-5 w-5" />
+                </button>
+                <input ref={fileInputRef} type="file" accept=".pdf" multiple onChange={handleFileUpload} className="hidden" />
+                <textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="നിങ്ങളുടെ ചോദ്യം ഇവിടെ ടൈപ്പ് ചെയ്യുക... / Type your question here..."
+                  className="flex-1 px-4 py-3 border-none outline-none resize-none bg-transparent placeholder-gray-500 text-gray-900"
+                  rows="1"
+                  style={{ minHeight: '48px', maxHeight: '120px' }}
+                  onInput={(e) => {
+                    e.target.style.height = 'auto';
+                    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+                  }}
+                />
+                <button onClick={sendMessage} disabled={!input.trim() && uploadedFiles.length === 0} className="m-2 bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 text-white p-2 rounded-full hover:from-green-500 hover:via-teal-500 hover:to-blue-500 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">
+                  <Send className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
